@@ -18,4 +18,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+/* Comentei essa parte porque declarei o middleware no RouteServiceProvider
+Route::group(['middleware' => 'cors'], function () {
+    Route::get('times', 'Api\TimesController@index');
+});
+*/
+
 Route::get('times', 'Api\TimesController@index');
+
