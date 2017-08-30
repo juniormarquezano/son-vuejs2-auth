@@ -1,10 +1,8 @@
 import Vue from 'vue'
 import './filters'
-import AppComponent from './components/app.component'
+import AppComponent from './components/App.vue'
+import { store } from './store'
 //import store from './store'
-
-//import {Time} from './time'; // Importo a classe e defino o caminho
-//import _ from 'lodash';
 
 // Carrega o bootstrap sem a necessidade de incluir link no html utilizando o url-loader
 // É necessário registrar arquivo no webpackconfig.js, conforme linhas 34 a 37
@@ -16,5 +14,5 @@ let meuVue = new Vue({
     components: {
         'app': AppComponent
     },
-    //store // seria a mesma coisa de store: store nos novos padrões ES6
+    store // seria a mesma coisa de store: store nos novos padrões ES6
 });
