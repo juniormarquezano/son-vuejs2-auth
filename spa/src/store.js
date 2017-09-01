@@ -33,10 +33,15 @@ export const store = new Vuex.Store({
     actions: {
         // Executa a ação ajax para consumir os dados da api
         'load-times'(context) {
-            Vue.http.get('http://localhost:8000/api/times').then(response => {
+            Vue.http.get('http://vuejs2-auth.app/api/times').then(response => {
                 let times = response.data.map(element => new Time(element.id, element.nome, element.escudo));
                 context.commit('set-times', times);// faz o commit para passar os times para o set-times
             })
         },
+        login(context, {email, password}) {
+            Vue.http.post('http://vuejs2-auth.app/api/login', { email, password }).then((response) => {
+                console.log(response.data.token);
+            })
+        }
     }
 });
