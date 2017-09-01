@@ -9,6 +9,9 @@ import router from './router'
 require('style-loader!css-loader!bootstrap/dist/css/bootstrap.min.css');
 require('bootstrap'); // carrega o js do bootstrap
 
+//window.sessionStorage.setItem('name', 'Junior Marquezano');
+//window.sessionStorage.removeItem('name');
+
 let meuVue = new Vue({
     router, // a mesma coisa de router: router
     el: '#app',

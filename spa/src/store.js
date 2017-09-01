@@ -31,7 +31,7 @@ export const store = new Vuex.Store({
         },
     },
     actions: {
-        // Executa a ação ajax para consumir os dados da api
+        // Executa a ação ajax para consumir os dados da api e retornar a lista de times
         'load-times'(context) {
             Vue.http.get('http://vuejs2-auth.app/api/times').then(response => {
                 let times = response.data.map(element => new Time(element.id, element.nome, element.escudo));
@@ -40,7 +40,13 @@ export const store = new Vuex.Store({
         },
         login(context, {email, password}) {
             Vue.http.post('http://vuejs2-auth.app/api/login', { email, password }).then((response) => {
-                console.log(response.data.token);
+                console.log(response.data.token); // recebendo o token enviado pela api
+                /*
+                cookie => informação armazenada no cliente, o servidor pode acessar
+                localStorage => armazenada no cliente, o servidor tem acesso a informação e poder ser armazenado ~5M
+                sessionStorage => armazenada no cliente -> expirar -> servidor não acessa
+                 */
+
             })
         }
     }
