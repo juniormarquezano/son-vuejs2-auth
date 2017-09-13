@@ -1,14 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import {Time} from './Time';
-import VueResource from 'vue-resource';
+import JwtToken from './services/jwt-token';
 
 Vue.use(Vuex);
-// Somente importar o Vuex, não é garantia do seu funcionamento correto.
-// O motivo é que não sabemos se ele está sendo carregado, antes ou depois, do Vue.
-// Por isso, utilizamos o use para fazer a integração com o Vue.
-// O mesmo serve para qualquer plugin ou biblioteca que você quiser integrar.
-Vue.use(VueResource);
 
 /* exemplo Laracasts */
 export const store = new Vuex.Store({
@@ -33,21 +28,15 @@ export const store = new Vuex.Store({
     actions: {
         // Executa a ação ajax para consumir os dados da api e retornar a lista de times
         'load-times'(context) {
+            /*
             Vue.http.get('http://vuejs2-auth.app/api/times').then(response => {
                 let times = response.data.map(element => new Time(element.id, element.nome, element.escudo));
                 context.commit('set-times', times);// faz o commit para passar os times para o set-times
             })
+            */
         },
         login(context, {email, password}) {
-            Vue.http.post('http://vuejs2-auth.app/api/login', { email, password }).then((response) => {
-                console.log(response.data.token); // recebendo o token enviado pela api
-                /*
-                cookie => informação armazenada no cliente, o servidor pode acessar
-                localStorage => armazenada no cliente, o servidor tem acesso a informação e poder ser armazenado ~5M
-                sessionStorage => armazenada no cliente -> expirar -> servidor não acessa
-                 */
-
-            })
+            JwtToken.accessToken(email, password);
         }
     }
 });
