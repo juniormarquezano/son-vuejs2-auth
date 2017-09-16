@@ -57,7 +57,10 @@
         },
         methods: {
             login(){
-                store.dispatch('login', this.user)
+                store.dispatch('login', this.user).then((response) => {
+                    //this.$router.push('/times') // redirecionando a rota normalmente
+                    this.$router.push({ name: 'time.list' }) // redirecionando com rotas nomeadas
+                })
             }
         }
     }
