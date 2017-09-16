@@ -10,14 +10,6 @@ import SessionStorage from './services/session-storage'
 require('style-loader!css-loader!bootstrap/dist/css/bootstrap.min.css');
 require('bootstrap'); // carrega o js do bootstrap
 
-//window.sessionStorage.setItem('name', 'Junior Marquezano');
-//window.sessionStorage.removeItem('name');
-//console.log(SessionStorage.set('nome', 'Junior'));
-//console.log(SessionStorage.get('nome'));
-//SessionStorage.remove('nome');
-console.log(SessionStorage.setObject('nome', {'nome' : 'Junior Marquezano'}));
-console.log(SessionStorage.getObject('nome'));
-
 let meuVue = new Vue({
     router, // a mesma coisa de router: router
     el: '#app',

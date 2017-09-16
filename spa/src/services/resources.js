@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueResource from 'vue-resource';
 
 Vue.use(VueResource);
+require('./interceptors');
 
 export class Jwt {
     static accessToken(email, password) {

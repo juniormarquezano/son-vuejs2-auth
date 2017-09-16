@@ -12,5 +12,8 @@ export default  {
         return Jwt.accessToken(email, password).then((response) => {
             this.token = response.data.token;
         })
+    },
+    getAuthorizationHeader() {
+        return `Bearer ${this.token}`;
     }
 }
