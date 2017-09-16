@@ -6,7 +6,7 @@ export default  {
         return SessionStorage.get('token')
     },
     set token(value) {
-        SessionStorage.set('token', value)
+        return value ? SessionStorage.set('token', value) : SessionStorage.remove('token');
     },
     accessToken(email, password) {
         return Jwt.accessToken(email, password).then((response) => {

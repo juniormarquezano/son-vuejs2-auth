@@ -8,6 +8,7 @@
             <h5 class="pull-right">Olá {{ user.name }}</h5>
             <router-link :to="{ name: 'time.list' }" class="btn btn-primary">Ver Tabela</router-link>
             <router-link :to="{ name: 'time.jogo' }" class="btn btn-primary">Novo Jogo</router-link>
+            <router-link :to="{ name: 'auth.logout' }" class="btn btn-primary">Logout</router-link>
             <hr>
         </div>
         <router-view></router-view><!-- declaração da rota -->

@@ -37,6 +37,12 @@ export const store = new Vuex.Store({
         authenticated(state) {
             state.auth.check = true; // altera o sate para true
         },
+        unauthenticated(state) {
+            state.auth.check = false;
+            state.auth.user = null;
+            SessionStorage.remove('user');
+            JwtToken.token = null;
+        }
     },
     actions: {
         // Executa a ação ajax para consumir os dados da api e retornar a lista de times
