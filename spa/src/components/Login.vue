@@ -57,9 +57,17 @@
         },
         methods: {
             login(){
-                store.dispatch('login', this.user).then((response) => {
-                    //this.$router.push('/times') // redirecionando a rota normalmente
-                    this.$router.push({ name: 'time.list' }) // redirecionando com rotas nomeadas
+                store.dispatch('login', this.user)
+                    .then((response) => {
+                        //this.$router.push('/times') // redirecionando a rota normalmente
+                        this.$router.push({ name: 'time.list' }) // redirecionando com rotas nomeadas
+                    })
+                    .catch((responseError) => {
+                        this.error.error = true;
+                        if (responseError.status === 400) {
+                            return this.error.message = responseError.data.error;
+                        }
+                        this.error.message = 'Login Falhou!!';
                 })
             }
         }
