@@ -53,12 +53,9 @@
                 // Vamos agora para o resultado do jogo
                 timeCasa.resultadoJogo(timeAdversario, golsTimeCasa, golsAdversario);
 
-                //this.$parent.showView('tabela')
-                //event.$emit('show-time-list');
-
                 store.commit('update', timeCasa);
                 store.commit('update', timeAdversario);
-                store.commit('show-time-list');
+                this.$router.push({ name: 'time.list' })
             },
             initJogo(times) { // Cria um novo ao clicar no botão "novo jogo"
                 let indexCasa = Math.floor(Math.random() * 20),

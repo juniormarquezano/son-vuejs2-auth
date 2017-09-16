@@ -42,9 +42,6 @@
     import { store } from '../store' // modo do exemplo do laracasts para usar o Vuex
 
     export default {
-        created() {
-            store.dispatch('load-times');
-        },
         data() {
             return {
                 order: {
