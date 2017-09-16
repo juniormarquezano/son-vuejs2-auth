@@ -9,3 +9,7 @@ export class Jwt {
         return Vue.http.post('http://vuejs2-auth.app/api/login', { email, password });
     }
 }
+
+const Times = Vue.resource('http://vuejs2-auth.app/api/times');
+
+export { Times }
