@@ -2,7 +2,8 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import {Time} from './Time';
 import JwtToken from './services/jwt-token';
-import {Times} from './services/resources';
+import { Times, User } from './services/resources';
+import SessionStorage from './services/session-storage';
 
 Vue.use(Vuex);
 
@@ -10,6 +11,9 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
     state: {
         times: [], // array que recebe os times vindo da mutation set-times
+        auth: {
+            user: SessionStorage.getObject('user')
+        }
     },
     getters: {
         timesLibertadores: state => state.times.slice(0,6),
@@ -25,23 +29,30 @@ export const store = new Vuex.Store({
                 state.times[index] = time;
             }
         },
+        setUser(state, user) {
+            SessionStorage.setObject('user', user);
+            state.auth.user = user; // mudando o estado do auth.user
+        }
     },
     actions: {
         // Executa a ação ajax para consumir os dados da api e retornar a lista de times
         'load-times'(context) {
-            /*
-            Vue.http.get('http://vuejs2-auth.app/api/times').then(response => {
-                let times = response.data.map(element => new Time(element.id, element.nome, element.escudo));
-                context.commit('set-times', times);// faz o commit para passar os times para o set-times
-            });
-            */
             Times.query().then((response) => {
                 let times = response.data.map(element => new Time(element.id, element.nome, element.escudo));
                 context.commit('set-times', times);// faz o commit para passar os times para o set-times
             })
         },
         login(context, {email, password}) {
-            return JwtToken.accessToken(email, password); // adicionando return ele retorna uma premisse
+            // adicionando return ele retorna uma premisse
+            return JwtToken.accessToken(email, password).then(response => {
+                context.dispatch('getUser');
+                return response;
+            })
+        },
+        getUser(context) {
+            User.query().then(response => {
+                context.commit('setUser', response.data.user)
+            })
         }
     }
 });

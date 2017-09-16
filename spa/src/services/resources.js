@@ -11,5 +11,6 @@ export class Jwt {
 }
 
 const Times = Vue.resource('http://vuejs2-auth.app/api/times');
+const User = Vue.resource('http://vuejs2-auth.app/api/user');
 
-export { Times }
+export { Times, User }
