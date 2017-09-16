@@ -12,6 +12,7 @@ export const store = new Vuex.Store({
     state: {
         times: [], // array que recebe os times vindo da mutation set-times
         auth: {
+            check: JwtToken.token != null, // verifica se o token existe, se existir o usuário está logado
             user: SessionStorage.getObject('user')
         }
     },
@@ -32,7 +33,10 @@ export const store = new Vuex.Store({
         setUser(state, user) {
             SessionStorage.setObject('user', user);
             state.auth.user = user; // mudando o estado do auth.user
-        }
+        },
+        authenticated(state) {
+            state.auth.check = true; // altera o sate para true
+        },
     },
     actions: {
         // Executa a ação ajax para consumir os dados da api e retornar a lista de times
@@ -45,6 +49,7 @@ export const store = new Vuex.Store({
         login(context, {email, password}) {
             // adicionando return ele retorna uma premisse
             return JwtToken.accessToken(email, password).then(response => {
+                context.commit('authenticated');
                 context.dispatch('getUser');
                 return response;
             })

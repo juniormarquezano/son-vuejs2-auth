@@ -8,22 +8,26 @@ export default [
     {
         name: 'time.list', // Rotas nomeadas
         path: '/',
-        component: TimeListComponent
+        component: TimeListComponent,
+        meta: { auth: true }
     },
     {
         name: 'time.jogo', // Rotas nomeadas
         path: '/jogo',
-        component: TimeJogoComponent
+        component: TimeJogoComponent,
+        meta: { auth: true }
     },
     {
         name: 'time.zona', // Rotas nomeadas
         path: '/zona',
-        component: TimeZonaComponent
+        component: TimeZonaComponent,
+        meta: { auth: true }
     },
     {
         name: 'auth.login', // Rotas nomeadas
         path: '/login',
         component: LoginComponent,
+        meta: { auth: false }
     }
 
 ];
