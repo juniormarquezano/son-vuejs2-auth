@@ -13,6 +13,12 @@ export default  {
             this.token = response.data.token;
         })
     },
+    refreshToken() {
+        return Jwt.refreshToken().then(response => {
+            this.token = response.data.token;
+            return response;
+        })
+    },
     getAuthorizationHeader() {
         return `Bearer ${this.token}`;
     }

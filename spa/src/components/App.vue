@@ -20,7 +20,9 @@
 
     export default {
         created() {
-            store.dispatch('load-times')
+            if (this.isAuth) {
+                store.dispatch('load-times')
+            }
         },
         computed: {
             isAuth() {
@@ -28,6 +30,13 @@
             },
             user() {
                 return store.state.auth.user ? store.state.auth.user : { name: '' }
+            }
+        },
+        watch: {
+            isAuth(value) {
+                if (value) {
+                    store.dispatch('load-times')
+                }
             }
         }
     }

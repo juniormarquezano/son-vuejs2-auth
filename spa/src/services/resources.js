@@ -8,6 +8,10 @@ export class Jwt {
     static accessToken(email, password) {
         return Vue.http.post('http://vuejs2-auth.app/api/login', { email, password });
     }
+
+    static refreshToken() {
+        return Vue.http.post('http://vuejs2-auth.app/api/refresh_token');
+    }
 }
 
 const Times = Vue.resource('http://vuejs2-auth.app/api/times');
